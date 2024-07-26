@@ -63,7 +63,7 @@ const player = new Fighter({
       imageSrc: './img/samuraiMack/Fall.png',
       framesMax: 2
     },
-    attack1: {
+    a: {
       imageSrc: './img/samuraiMack/Attack1.png',
       framesMax: 6
     },
@@ -300,7 +300,11 @@ window.addEventListener('keydown', (event) => {
         enemy.lastKey = 'ArrowLeft'
         break
       case 'ArrowUp':
-        enemy.velocity.y = -20
+      if(enemy.position.y < 500){  
+      console.log(enemy,player);
+      enemy.velocity.y = -20
+      }
+       
         break
       case 'ArrowDown':
         enemy.attack()
