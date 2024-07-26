@@ -63,7 +63,7 @@ const player = new Fighter({
       imageSrc: './img/samuraiMack/Fall.png',
       framesMax: 2
     },
-    a: {
+    attack1: {
       imageSrc: './img/samuraiMack/Attack1.png',
       framesMax: 6
     },
@@ -75,7 +75,7 @@ const player = new Fighter({
       imageSrc: './img/samuraiMack/Death.png',
       framesMax: 6
     }
-  },
+  }, 
   attackBox: {
     offset: {
       x: 100,
