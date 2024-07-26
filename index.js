@@ -1,6 +1,7 @@
 const canvas = document.querySelector('canvas')
 const c = canvas.getContext('2d')
-
+const player1 ='dk'; //dk
+const player2 ='scumani'; //dk
 canvas.width = 1024
 canvas.height = 576
 
@@ -39,7 +40,7 @@ const player = new Fighter({
     x: 0,
     y: 0
   },
-  imageSrc: './img/samuraiMack/Idle.png',
+  imageSrc: './img/'+player1+'/Idle.png',
   framesMax: 8,
   scale: 2.5,
   offset: {
@@ -48,31 +49,35 @@ const player = new Fighter({
   },
   sprites: {
     idle: {
-      imageSrc: './img/samuraiMack/Idle.png',
+      imageSrc: './img/'+player1+'/Idle.png',
       framesMax: 8
     },
     run: {
-      imageSrc: './img/samuraiMack/Run.png',
+      imageSrc: './img/'+player1+'/Run.png',
       framesMax: 8
     },
     jump: {
-      imageSrc: './img/samuraiMack/Jump.png',
+      imageSrc: './img/'+player1+'/Jump.png',
       framesMax: 2
     },
     fall: {
-      imageSrc: './img/samuraiMack/Fall.png',
+      imageSrc: './img/'+player1+'/Fall.png',
       framesMax: 2
     },
     attack1: {
-      imageSrc: './img/samuraiMack/Attack1.png',
+      imageSrc: './img/'+player1+'/Attack1.png',
+      framesMax: 6
+    },
+    attack2: {
+      imageSrc: './img/'+player1+'/Attack2.png',
       framesMax: 6
     },
     takeHit: {
-      imageSrc: './img/samuraiMack/Take Hit - white silhouette.png',
+      imageSrc: './img/'+player1+'/Take Hit - white silhouette.png',
       framesMax: 4
     },
     death: {
-      imageSrc: './img/samuraiMack/Death.png',
+      imageSrc: './img/'+player1+'/Death.png',
       framesMax: 6
     }
   }, 
@@ -100,7 +105,7 @@ const enemy = new Fighter({
     x: -50,
     y: 0
   },
-  imageSrc: './img/kenji/Idle.png',
+  imageSrc: './img/'+player2+'/Idle.png',
   framesMax: 4,
   scale: 2.5,
   offset: {
@@ -109,31 +114,35 @@ const enemy = new Fighter({
   },
   sprites: {
     idle: {
-      imageSrc: './img/kenji/Idle.png',
+      imageSrc: './img/'+player2+'/Idle.png',
       framesMax: 4
     },
     run: {
-      imageSrc: './img/kenji/Run.png',
+      imageSrc: './img/'+player2+'/Run.png',
       framesMax: 8
     },
     jump: {
-      imageSrc: './img/kenji/Jump.png',
+      imageSrc: './img/'+player2+'/Jump.png',
       framesMax: 2
     },
     fall: {
-      imageSrc: './img/kenji/Fall.png',
+      imageSrc: './img/'+player2+'/Fall.png',
       framesMax: 2
     },
     attack1: {
-      imageSrc: './img/kenji/Attack1.png',
+      imageSrc: './img/'+player2+'/Attack1.png',
+      framesMax: 4
+    },
+    attack2: {
+      imageSrc: './img/'+player2+'/Attack2.png',
       framesMax: 4
     },
     takeHit: {
-      imageSrc: './img/kenji/Take hit.png',
+      imageSrc: './img/'+player2+'/Take hit.png',
       framesMax: 3
     },
     death: {
-      imageSrc: './img/kenji/Death.png',
+      imageSrc: './img/'+player2+'/Death.png',
       framesMax: 7
     }
   },
@@ -283,10 +292,14 @@ window.addEventListener('keydown', (event) => {
       case 'w':
         player.velocity.y = -20
         break
-      case ' ':
+      case 'j':
         player.attack()
         break
+     case 'k':
+        player.attack1()
+        break
     }
+    
   }
 
   if (!enemy.dead) {
