@@ -1,7 +1,7 @@
 const canvas = document.querySelector('canvas')
 const c = canvas.getContext('2d')
 const player1 ='dk'; //dk
-const player2 ='scumani'; //dk
+const player2 ='duo'; //dk
 canvas.width = 1024
 canvas.height = 576
 
@@ -156,6 +156,8 @@ const enemy = new Fighter({
   }
 })
 
+
+
 console.log(player)
 
 const keys = {
@@ -172,7 +174,7 @@ const keys = {
     pressed: false
   }
 }
-
+player.comb = [];
 decreaseTimer()
 
 function animate() {
@@ -190,8 +192,10 @@ function animate() {
   enemy.velocity.x = 0
 
   // player movement
-
+  
   if (keys.a.pressed && player.lastKey === 'a') {
+    
+    console.log("speedup")
     player.velocity.x = -5
     player.switchSprite('run')
   } else if (keys.d.pressed && player.lastKey === 'd') {
@@ -280,6 +284,7 @@ animate()
 
 window.addEventListener('keydown', (event) => {
   if (!player.dead) {
+    
     switch (event.key) {
       case 'd':
         keys.d.pressed = true
@@ -290,7 +295,14 @@ window.addEventListener('keydown', (event) => {
         player.lastKey = 'a'
         break
       case 'w':
+        console.log(player.position.y);
+        if(player.position.y == 330){
         player.velocity.y = -20
+      }
+      
+        break
+        case 's':
+        console.log('squat');
         break
       case 'j':
         player.attack()
@@ -299,7 +311,11 @@ window.addEventListener('keydown', (event) => {
         player.attack1()
         break
     }
-    
+    if(['dasjk'].includes(event.key)){
+      player.comb.push(event.key);
+    console.log(player.comb);
+
+    }
   }
 
   if (!enemy.dead) {

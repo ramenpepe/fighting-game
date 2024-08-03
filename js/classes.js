@@ -20,6 +20,7 @@ class Sprite {
   }
 
   draw() {
+  //  c.translate(this.position.x + (this.image.width / this.framesMax) * this.scale, this.position.y);
     c.drawImage(
       this.image,
       this.framesCurrent * (this.image.width / this.framesMax),
