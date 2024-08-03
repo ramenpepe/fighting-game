@@ -343,6 +343,82 @@ window.addEventListener('keydown', (event) => {
   }
 })
 
+ // Detect keydown events for 'A' and 'W' keys
+ document.addEventListener('keydown', function(event) {
+  if (event.key === 'a' || event.key === 'A') {
+    console.log('A key pressed');
+    // Add your custom code for 'A' key press here
+  }
+  if (event.key === 'w' || event.key === 'W') {
+    console.log('W key pressed');
+    // Add your custom code for 'W' key press here
+  }
+});
+
+// Detect swipe left, right, up, and down
+let touchstartX = 0;
+let touchendX = 0;
+let touchstartY = 0;
+let touchendY = 0;
+const threshold = 50; // minimum distance to be considered a swipe
+
+function simulateKeydown(key,dir) {
+  let event;
+  if(dir == 0 ){
+   event = new KeyboardEvent('keyup', { key: key });
+}else{
+  console.log("up")
+   event = new KeyboardEvent('keydown', { key: key });
+}
+  window.dispatchEvent(event);
+}
+
+
+
+function handleSwipe(dir) {
+  const horizontalSwipeDistance = touchendX - touchstartX;
+  const verticalSwipeDistance = touchendY - touchstartY;
+
+  if (Math.abs(horizontalSwipeDistance) > Math.abs(verticalSwipeDistance)) {
+    // Horizontal swipe
+    if (horizontalSwipeDistance < -threshold) {
+      console.log('Swiped left');
+      simulateKeydown('a',dir);
+    } else if (horizontalSwipeDistance > threshold) {
+      console.log('Swiped right');
+      simulateKeydown('d',dir);
+    }
+  } else {
+    // Vertical swipe
+    if (verticalSwipeDistance < -threshold) {
+      console.log('Swiped up');
+      simulateKeydown('w',dir);
+    } else if (verticalSwipeDistance > threshold) {
+      console.log('Swiped down');
+    }
+  }
+}
+
+window.addEventListener('touchstart', function(event) {
+  touchstartX = event.changedTouches[0].screenX;
+  touchstartY = event.changedTouches[0].screenY;
+});
+
+
+window.addEventListener('touchmove', function(event) {
+  touchendX = event.changedTouches[0].screenX;
+  touchendY = event.changedTouches[0].screenY;
+  handleSwipe(1);
+});
+
+window.addEventListener('touchend', function(event) {
+  touchendX = event.changedTouches[0].screenX;
+  touchendY = event.changedTouches[0].screenY;
+  handleSwipe(0);
+});
+
+
+
 window.addEventListener('keyup', (event) => {
   switch (event.key) {
     case 'd':
